@@ -104,25 +104,44 @@ mod tests {
         bank.create_account(user1);
         assert!(bank.accounts[0].balance == 0.0);
     }
-    // #[test]
-    // pub fn test_account_balance() {
-    //      let mut bank = BankSystem::new();
+    #[test]
 
-    //     //testing the number of account is zero at first
-    //     assert!(bank.accounts.len() == 0);
+    pub fn test_account_balance() {
+        let mut bank = BankSystem::new();
 
-    //     let user1 = Details {
-    //         name: "Ola".to_string(),
-    //         age: 19,
-    //         address: "Ikorodu lagos".to_string(),
-    //         gender: Gender::Male,
-    //         occupation: "Software Engineer".to_string(),
-    //         status: Status::Active,
-    //         account_type: AccountType::Savings,
-    //     };
+        //testing the number of account is zero at first
+        assert!(bank.accounts.len() == 0);
 
-    //     bank.create_account(user1);
+        let user1 = Details {
+            name: "Ola".to_string(),
+            age: 19,
+            address: "Ikorodu lagos".to_string(),
+            gender: Gender::Male,
+            occupation: "Software Engineer".to_string(),
+            status: Status::Active,
+            account_type: AccountType::Savings,
+        };
 
-    //     assert_eq!(bank.accounts[0].balance, 123.0);
-    // }
+        let deposit_amount = 123.0;
+        let withdraw_amount = 33.33;
+        let remaining_bal = deposit_amount - withdraw_amount;
+
+        bank.create_account(user1);
+
+        let account_num = bank.accounts[0].account_number.clone();
+
+        bank.deposit(&account_num, deposit_amount);
+
+        assert_eq!(bank.accounts[0].balance, deposit_amount);
+
+        //shouldn't be effective and fails silently since it's negative numbers
+        bank.withdraw(&account_num, -7.0);
+
+        assert_eq!(bank.accounts[0].balance, deposit_amount);
+
+        //should work since it's positive number
+        bank.withdraw(&account_num, withdraw_amount);
+
+        assert_eq!(bank.accounts[0].balance, remaining_bal);
+    }
 }

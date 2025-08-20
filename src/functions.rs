@@ -167,6 +167,40 @@ impl BankSystem {
         }
     }
 
+    pub fn deposit(&mut self, account_number: &str, amount: f64) {
+        match self
+            .accounts
+            .iter_mut()
+            .find(|account| account.account_number == account_number)
+        {
+            Some(account) => match account.details.status {
+                Status::Active => {
+                    if amount <= 0.0 {
+                        println!("Value must be greater than 0.1");
+                        return;
+                    }
+
+                    account.balance += amount;
+                    println!("✅ Successfully deposited ₦{:.2}", amount);
+                    println!("New balance: ₦{:.2}", account.balance);
+                }
+                Status::Closed => {
+                    println!(
+                        "😩 Your account has been closed, Visit our nearest bank to re-open your account"
+                    );
+                }
+                Status::Dormant => {
+                    println!(
+                        "😩 Your account has entered Dormant, Visit our nearest bank to re-activate your account"
+                    );
+                }
+            },
+            None => {
+                println!("Account not found");
+            }
+        }
+    }
+
     pub fn deposit_interactive(&mut self) {
         println!("\n=== Deposit ===");
         let account_number = get_input();
@@ -209,7 +243,45 @@ impl BankSystem {
                 }
             },
             None => {
-                println!("Account not foumd")
+                println!("Account not found")
+            }
+        }
+    }
+
+    pub fn withdraw(&mut self, account_number: &str, amount: f64) {
+        match self
+            .accounts
+            .iter_mut()
+            .find(|account| account.account_number == account_number)
+        {
+            Some(account) => match account.details.status {
+                Status::Active => {
+                    if amount <= 0.0 {
+                        println!("Value must be greater than 0.1");
+                        return;
+                    }
+
+                    if amount > account.balance {
+                        println!("Insufficient funds");
+                        return;
+                    }
+                    account.balance -= amount;
+                    println!("✅ Successfully withdraw ₦{:.2}", amount);
+                    println!("New balance: ₦{:.2}", account.balance);
+                }
+                Status::Closed => {
+                    println!(
+                        "😩 Your account has been closed, Visit our nearest bank to re-open your account"
+                    );
+                }
+                Status::Dormant => {
+                    println!(
+                        "😩 Your account has entered Dormant, Visit our nearest bank to re-activate your account"
+                    );
+                }
+            },
+            None => {
+                println!("Account not found");
             }
         }
     }
