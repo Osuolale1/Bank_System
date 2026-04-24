@@ -109,7 +109,7 @@ impl BankSystem {
 
         let account_number = self.create_account(details);
 
-        println!("\n✅ Account created successfully!");
+        println!("\n Account created successfully!");
         println!("Your account number is: {}", account_number);
         println!("Please keep this number safe for future transactions.");
     }
@@ -132,7 +132,7 @@ impl BankSystem {
                 println!("Status: {:?}", account.details.status);
                 println!("Balance: ₦{:.2}", account.balance);
             }
-            None => println!("❌ Account not found. Please check the account number."),
+            None => println!("Account not found. Please check the account number."),
         }
     }
 
@@ -163,7 +163,7 @@ impl BankSystem {
             Some(account) => {
                 println!("Balance: ₦{:.2}", account.balance);
             }
-            None => println!("❌ Account not found. Please check the account number."),
+            None => println!("Account not found. Please check the account number."),
         }
     }
 
@@ -181,17 +181,17 @@ impl BankSystem {
                     }
 
                     account.balance += amount;
-                    println!("✅ Successfully deposited ₦{:.2}", amount);
+                    println!("Successfully deposited ₦{:.2}", amount);
                     println!("New balance: ₦{:.2}", account.balance);
                 }
                 Status::Closed => {
                     println!(
-                        "😩 Your account has been closed, Visit our nearest bank to re-open your account"
+                        "Your account has been closed, Visit our nearest bank to re-open your account"
                     );
                 }
                 Status::Dormant => {
                     println!(
-                        "😩 Your account has entered Dormant, Visit our nearest bank to re-activate your account"
+                        "Your account has entered Dormant, Visit our nearest bank to re-activate your account"
                     );
                 }
             },
@@ -228,17 +228,17 @@ impl BankSystem {
             Some(account) => match account.details.status {
                 Status::Active => {
                     account.balance += amount;
-                    println!("✅ Successfully deposited ₦{:.2}", amount);
+                    println!("Successfully deposited ₦{:.2}", amount);
                     println!("New balance: ₦{:.2}", account.balance);
                 }
                 Status::Closed => {
                     println!(
-                        "😩 Your account has been closed, Visit our nearest bank to re-open your account"
+                        "Your account has been closed, Visit our nearest bank to re-open your account"
                     );
                 }
                 Status::Dormant => {
                     println!(
-                        "😩 Your account has entered Dormant, Visit our nearest bank to re-activate your account"
+                        "Your account has entered Dormant, Visit our nearest bank to re-activate your account"
                     );
                 }
             },
@@ -266,17 +266,17 @@ impl BankSystem {
                         return;
                     }
                     account.balance -= amount;
-                    println!("✅ Successfully withdraw ₦{:.2}", amount);
+                    println!("Successfully withdraw ₦{:.2}", amount);
                     println!("New balance: ₦{:.2}", account.balance);
                 }
                 Status::Closed => {
                     println!(
-                        "😩 Your account has been closed, Visit our nearest bank to re-open your account"
+                        "Your account has been closed, Visit our nearest bank to re-open your account"
                     );
                 }
                 Status::Dormant => {
                     println!(
-                        "😩 Your account has entered Dormant, Visit our nearest bank to re-activate your account"
+                        "Your account has entered Dormant, Visit our nearest bank to re-activate your account"
                     );
                 }
             },
@@ -317,17 +317,17 @@ impl BankSystem {
                         return;
                     }
                     account.balance -= amount;
-                    println!("✅ Successfully withdraw ₦{:.2}", amount);
+                    println!("Successfully withdraw ₦{:.2}", amount);
                     println!("New balance: ₦{:.2}", account.balance);
                 }
                 Status::Closed => {
                     println!(
-                        "😩 Your account has been closed, Visit our nearest bank to re-open your account"
+                        "Your account has been closed, Visit our nearest bank to re-open your account"
                     );
                 }
                 Status::Dormant => {
                     println!(
-                        "😩 Your account has entered Dormant, Visit our nearest bank to re-activate your account"
+                        "Your account has entered Dormant, Visit our nearest bank to re-activate your account"
                     );
                 }
             },
